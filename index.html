@@ -536,7 +536,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   <div class="container">
     <div class="footer-name">Hudson Shaw</div>
     <div class="footer-role">Associate at Finial Group — Houston, Texas</div>
-    <p>&copy; 2024. Built with care.</p>
+    <p>&copy; <span id="yr"></span>. Built with care.</p>
   </div>
 </footer>
 
@@ -574,8 +574,10 @@ const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
   let current = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
-  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent-2)' : ''; });
+navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent-2)' : ''; });
 });
+
+document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
