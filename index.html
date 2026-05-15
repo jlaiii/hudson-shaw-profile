@@ -164,7 +164,7 @@ nav.scrolled { background:rgba(3,3,3,.85); backdrop-filter:blur(20px); border-bo
   background:linear-gradient(180deg, var(--gold-dim), var(--gold-dim) var(--progress, 0%), var(--edge) var(--progress, 0%));
 }
 .timeline-node { position:absolute; left:3px; width:11px; height:11px; border-radius:50%; border:2px solid var(--gold); background:var(--void); box-shadow:0 0 10px rgba(201,168,76,.3); transform:translateY(-50%); top:28px; }
-.tl-item { padding:32px 0 40px 40px; border-bottom:1px solid var(--edge); position:relative; opacity:0; transform:translateX(40px); }
+.tl-item { padding:32px 0 40px 40px; border-bottom:1px solid var(--edge); position:relative; }
 .tl-item:last-child { border-bottom:none; }
 .tl-date { font-family:'Space Grotesk',sans-serif; font-size:.75rem; color:var(--gold-dim); letter-spacing:0.05em; margin-bottom:6px; }
 .tl-header { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
@@ -253,7 +253,7 @@ footer .fname { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-w
 footer .frole { font-size:.82rem; color:var(--text-faint); margin-top:4px; }
 
 /* ─── Scroll reveal classes ─── */
-.reveal { opacity:0; transform:translateY(40px); will-change:opacity,transform; }
+.reveal { will-change:opacity,transform; }
 </style>
 </head>
 <body>
@@ -601,7 +601,7 @@ window.addEventListener('load', () => {
 /* ── GSAP Scroll reveals ── */
 const defaultsReveal = { y: 50, opacity: 0, duration: 0.9, ease: "power3.out" };
 gsap.utils.toArray('.reveal').forEach(el => {
-  gsap.from(el, { ...defaultsReveal, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+  gsap.fromTo(el, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
 });
 
 /* ── Timeline items stagger ── */
