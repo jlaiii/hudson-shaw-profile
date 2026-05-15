@@ -29,10 +29,14 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 
 /* Hero */
 .hero { min-height: 100dvh; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 80px; position: relative; }
+.hero-wrap { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+.hero-photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0; }
 .hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(59,130,246,0.15); padding: 6px 14px; border-radius: 100px; margin-bottom: 32px; width: fit-content; }
 .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; }
 .hero h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 20px; }
-.hero .subtitle { font-size: clamp(1.1rem, 2.2vw, 1.35rem); color: var(--fg-muted); font-weight: 300; max-width: 560px; margin-bottom: 40px; line-height: 1.5; }
+.hero .subtitle { font-size: clamp(1.1rem, 2.2vw, 1.35rem); color: var(--fg-muted); font-weight: 300; max-width: 560px; margin-bottom: 32px; line-height: 1.5; }
+.linkedin-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--accent); text-decoration: none; font-weight: 500; padding: 8px 16px; background: var(--accent-soft); border: 1px solid rgba(59,130,246,0.15); border-radius: 8px; transition: background 0.2s; }
+.linkedin-link:hover { background: rgba(59,130,246,0.15); }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 24px; font-size: 0.875rem; color: var(--fg-dim); }
 .hero-meta span { display: flex; align-items: center; gap: 6px; }
 .hero-meta svg { width: 16px; height: 16px; opacity: 0.6; }
@@ -125,9 +129,18 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 <!-- Hero -->
 <section class="hero" id="top">
   <div class="container">
-    <div class="hero-badge">Associate at Finial Group</div>
-    <h1>Hudson Shaw</h1>
-    <p class="subtitle">Strategic communications and marketing professional with a 3.5 GPA at the University of Houston. Experienced in commercial real estate, sales, and customer-facing operations across industrial, brokerage, and outdoor service environments.</p>
+    <div class="hero-wrap">
+      <img src="images/profile.jpg" alt="Hudson Shaw" class="hero-photo">
+      <div>
+        <div class="hero-badge">Associate at Finial Group</div>
+        <h1>Hudson Shaw</h1>
+        <p class="subtitle">Strategic communications and marketing professional with a 3.5 GPA at the University of Houston. Experienced in commercial real estate, sales, and customer-facing operations across industrial, brokerage, and outdoor service environments.</p>
+        <a href="https://www.linkedin.com/in/hudsonshaw/" class="linkedin-link" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          View on LinkedIn
+        </a>
+      </div>
+    </div>
     <div class="hero-meta">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Houston, Texas</span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Finial Group</span>
