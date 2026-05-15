@@ -6,280 +6,481 @@
 <title>Hudson Shaw</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0b0d;
-  --bg-elevated: #111215;
-  --bg-card: #16181c;
-  --fg: #e8eaed;
-  --fg-muted: #9aa0a6;
-  --fg-dim: #5f6368;
-  --accent: #3b82f6;
-  --accent-soft: rgba(59,130,246,0.08);
+  --bg: #1c1917;
+  --bg-panel: #292524;
+  --bg-elevated: #44403c;
+  --text: #fafaf9;
+  --text-2: #e7e5e4;
+  --text-3: #a8a29e;
+  --text-4: #78716c;
+  --accent: #d97706;
+  --accent-2: #f59e0b;
+  --accent-3: #fbbf24;
+  --accent-soft: rgba(217,119,6,0.08);
+  --accent-glow: rgba(217,119,6,0.18);
+  --green: #84cc16;
   --border: rgba(255,255,255,0.06);
-  --radius: 12px;
-  --max-width: 920px;
-  --transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  --border-hover: rgba(255,255,255,0.10);
+  --surface: rgba(255,255,255,0.03);
+  --radius: 14px;
+  --max-width: 960px;
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
-.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  line-height: 1.65; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Film grain */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none; opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
+
+/* Ember particles */
+.ember-wrap { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.ember { position: absolute; width: 3px; height: 3px; background: var(--accent-2); border-radius: 50%; box-shadow: 0 0 6px var(--accent-2); opacity: 0; will-change: transform, opacity; }
+
+@keyframes ember-rise {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10%  { opacity: 0.6; }
+  50%  { opacity: 0.3; }
+  90%  { opacity: 0.1; }
+  100% { transform: translateY(-110vh) translateX(var(--drift)) scale(0.3); opacity: 0; }
+}
+
+.ember:nth-child(1)  { left: 5%;  bottom: 0; animation: ember-rise 12s 0.0s infinite ease-in; --drift: 15px; }
+.ember:nth-child(2)  { left: 15%; bottom: -2%; animation: ember-rise 15s 2.0s infinite ease-in; --drift: -20px; width: 2px; height: 2px; }
+.ember:nth-child(3)  { left: 25%; bottom: 0; animation: ember-rise 10s 1.5s infinite ease-in; --drift: 25px; }
+.ember:nth-child(4)  { left: 35%; bottom: -1%; animation: ember-rise 14s 0.5s infinite ease-in; --drift: -10px; }
+.ember:nth-child(5)  { left: 48%; bottom: 0; animation: ember-rise 11s 3.0s infinite ease-in; --drift: 30px; width: 2px; height: 2px; }
+.ember:nth-child(6)  { left: 55%; bottom: -3%; animation: ember-rise 16s 1.0s infinite ease-in; --drift: -25px; }
+.ember:nth-child(7)  { left: 62%; bottom: 0; animation: ember-rise 13s 4.0s infinite ease-in; --drift: 10px; }
+.ember:nth-child(8)  { left: 70%; bottom: -2%; animation: ember-rise 9s  0.2s infinite ease-in; --drift: -30px; }
+.ember:nth-child(9)  { left: 78%; bottom: 0; animation: ember-rise 17s 2.5s infinite ease-in; --drift: 20px; width: 2px; height: 2px; }
+.ember:nth-child(10) { left: 88%; bottom: -1%; animation: ember-rise 12s 5.0s infinite ease-in; --drift: -15px; }
+.ember:nth-child(11) { left: 8%;  bottom: -5%; animation: ember-rise 18s 1.2s infinite ease-in; --drift: 18px; }
+.ember:nth-child(12) { left: 22%; bottom: -3%; animation: ember-rise 11s 3.8s infinite ease-in; --drift: -12px; width: 2px; height: 2px; }
+.ember:nth-child(13) { left: 40%; bottom: -4%; animation: ember-rise 14s 0.8s infinite ease-in; --drift: 22px; }
+.ember:nth-child(14) { left: 52%; bottom: -2%; animation: ember-rise 10s 2.2s infinite ease-in; --drift: -18px; }
+.ember:nth-child(15) { left: 66%; bottom: -5%; animation: ember-rise 15s 4.5s infinite ease-in; --drift: 15px; width: 2px; height: 2px; }
+.ember:nth-child(16) { left: 82%; bottom: -3%; animation: ember-rise 13s 1.8s infinite ease-in; --drift: -28px; }
+.ember:nth-child(17) { left: 12%; bottom: -1%; animation: ember-rise 12s 6.0s infinite ease-in; --drift: 8px; }
+.ember:nth-child(18) { left: 30%; bottom: -6%; animation: ember-rise 16s 0.4s infinite ease-in; --drift: -8px; width: 2px; height: 2px; }
+.ember:nth-child(19) { left: 58%; bottom: -4%; animation: ember-rise 11s 5.5s infinite ease-in; --drift: 18px; }
+.ember:nth-child(20) { left: 75%; bottom: -2%; animation: ember-rise 14s 3.5s infinite ease-in; --drift: -22px; }
+
+.content { position: relative; z-index: 1; }
+
+/* Nav */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(28,25,23,0.75); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+.nav-inner { max-width: var(--max-width); margin: 0 auto; padding: 16px 28px;
+  display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 500; color: var(--accent-2); letter-spacing: 0.1em; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-size: 0.8rem; color: var(--text-3); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent-2); }
+@media (max-width: 640px) { .nav-links { display: none; } }
 
 /* Hero */
-.hero { min-height: 100dvh; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 80px; position: relative; }
-.hero-wrap { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
-.hero-photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0; }
-.hero-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(59,130,246,0.15); padding: 6px 14px; border-radius: 100px; margin-bottom: 32px; width: fit-content; }
-.hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; display: inline-block; }
-.hero h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 20px; }
-.hero .subtitle { font-size: clamp(1.1rem, 2.2vw, 1.35rem); color: var(--fg-muted); font-weight: 300; max-width: 560px; margin-bottom: 32px; line-height: 1.5; }
-.linkedin-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--accent); text-decoration: none; font-weight: 500; padding: 8px 16px; background: var(--accent-soft); border: 1px solid rgba(59,130,246,0.15); border-radius: 8px; transition: background 0.2s; }
-.linkedin-link:hover { background: rgba(59,130,246,0.15); }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 24px; font-size: 0.875rem; color: var(--fg-dim); }
+.hero { min-height: 100dvh; min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center; padding: 120px 0 80px; position: relative; }
+.hero-photo-wrap { position: relative; margin-bottom: 32px; }
+.hero-photo { width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--accent); box-shadow: 0 0 40px rgba(217,119,6,0.25), 0 4px 24px rgba(0,0,0,0.4); }
+.hero-available { position: absolute; bottom: 6px; right: 6px; width: 18px; height: 18px;
+  background: var(--green); border-radius: 50%; border: 3px solid var(--bg);
+  box-shadow: 0 0 8px var(--green); }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-2);
+  background: var(--accent-soft); border: 1px solid rgba(217,119,6,0.15);
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 20px; }
+.hero h1 { font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+.hero h1 .accent { color: var(--accent-2); }
+.hero-subtitle { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-2);
+  max-width: 540px; line-height: 1.6; margin: 0 auto 28px; font-weight: 300; }
+.hero-cta { display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; color: var(--accent); text-decoration: none; font-weight: 500;
+  padding: 10px 20px; background: var(--accent-soft); border: 1px solid rgba(217,119,6,0.15);
+  border-radius: 8px; transition: all 0.2s; }
+.hero-cta:hover { background: rgba(217,119,6,0.12); border-color: rgba(217,119,6,0.25); }
+.hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;
+  margin-top: 36px; font-size: 0.8rem; color: var(--text-3); }
 .hero-meta span { display: flex; align-items: center; gap: 6px; }
-.hero-meta svg { width: 16px; height: 16px; opacity: 0.6; }
-.hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--fg-dim); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; animation: bounce 2s infinite; cursor: pointer; text-decoration: none; }
-@keyframes bounce { 0%,20%,50%,80%,100%{ transform: translateX(-50%) translateY(0); } 40%{ transform: translateX(-50%) translateY(-8px); } 60%{ transform: translateX(-50%) translateY(-4px); } }
+.hero-meta svg { width: 14px; height: 14px; opacity: 0.6; }
+.hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  color: var(--text-4); animation: bounce 2.5s infinite; }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)} }
 
-/* Sections */
-.section { padding: 100px 0; border-top: 1px solid var(--border); }
-.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 12px; }
-.section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg-dim); }
-.section h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; letter-spacing: -0.02em; }
+/* Section */
+.section { padding: 80px 0; border-top: 1px solid var(--border); }
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 36px; }
+.section-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--accent-2); font-weight: 500; border: 1px solid rgba(217,119,6,0.2);
+  padding: 4px 10px; border-radius: 6px; }
+.section h2 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); font-weight: 700;
+  letter-spacing: -0.02em; color: var(--text); }
 
-/* Cards */
-.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; transition: transform var(--transition), border-color var(--transition); }
-.card:hover { border-color: rgba(59,130,246,0.2); transform: translateY(-2px); }
+/* About */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.about-text { font-size: 1.05rem; line-height: 1.7; color: var(--text-2); }
+.about-text p + p { margin-top: 1.1em; }
+.about-highlights { display: flex; flex-direction: column; gap: 14px; }
+.highlight-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px;
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; }
+.highlight-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-soft);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent); }
+.highlight-icon svg { width: 16px; height: 16px; }
+.highlight-label { font-size: 0.75rem; color: var(--text-4); text-transform: uppercase;
+  letter-spacing: 0.08em; margin-bottom: 2px; }
+.highlight-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
 
-/* Stats */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px; }
-.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; text-align: center; }
-.stat-number { font-size: 2.25rem; font-weight: 700; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
-.stat-label { font-size: 0.75rem; color: var(--fg-dim); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+/* Stats strip */
+.stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px; }
+.stat-cell { text-align: center; padding: 20px; border-radius: 10px;
+  transition: background 0.2s; }
+.stat-cell:hover { background: var(--surface); }
+.stat-number { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 500;
+  color: var(--accent-2); line-height: 1; text-shadow: 0 0 20px rgba(245,158,11,0.15); }
+.stat-label { font-size: 0.7rem; color: var(--text-4); margin-top: 8px;
+  text-transform: uppercase; letter-spacing: 0.08em; }
+@media (max-width: 640px) { .stats-strip { grid-template-columns: repeat(2, 1fr); } }
 
-/* Timeline Experience */
-.timeline { position: relative; }
-.timeline-item { position: relative; padding-left: 28px; padding-bottom: 48px; border-left: 1px solid var(--border); }
-.timeline-item:last-child { padding-bottom: 0; border-left: 1px solid transparent; }
-.timeline-item::before { content: ''; position: absolute; left: -5px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
-.role-title { font-size: 1.15rem; font-weight: 600; color: var(--fg); }
-.role-company { color: var(--accent); font-weight: 500; margin-top: 2px; }
-.role-meta { font-size: 0.82rem; color: var(--fg-dim); margin-top: 4px; }
-.role-meta span+span::before { content: ' \2022 '; }
-.role-desc { color: var(--fg-muted); font-size: 0.92rem; line-height: 1.65; margin-top: 14px; }
+/* Timeline */
+.timeline { position: relative; display: flex; flex-direction: column; gap: 0; }
+.timeline-item { display: grid; grid-template-columns: 200px 1fr; gap: 32px;
+  padding: 32px 0; border-top: 1px solid var(--border); }
+.timeline-item:first-child { border-top: none; padding-top: 0; }
+.timeline-date { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+  color: var(--text-3); white-space: nowrap; margin-top: 4px; }
+.timeline-body { }
+.role-title { font-size: 1.1rem; font-weight: 600; color: var(--text); display: inline; }
+.role-company { color: var(--accent); font-weight: 500; }
+.role-meta { font-size: 0.8rem; color: var(--text-3); margin-top: 4px; }
+.role-desc { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; margin-top: 10px; }
 .role-desc ul { margin-top: 8px; padding-left: 18px; }
-.role-desc li { margin-bottom: 6px; color: var(--fg-muted); }
+.role-desc li { margin-bottom: 5px; color: var(--text-2); }
 .role-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.role-tags .tag, .tag { font-size: 0.75rem; background: var(--accent-soft); color: var(--accent); padding: 4px 12px; border-radius: 100px; font-weight: 500; }
+.tag { font-size: 0.72rem; background: var(--accent-soft); color: var(--accent-2);
+  padding: 4px 12px; border-radius: 100px; font-family: 'JetBrains Mono', monospace; }
+.company-details { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--border); }
+.company-details h4 { font-size: 0.68rem; font-weight: 500; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-4); margin-bottom: 12px; }
+
+@media (max-width: 768px) {
+  .timeline-item { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+  .timeline-date { margin-bottom: 4px; }
+}
 
 /* Education */
-.edu-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
-.edu-school { font-size: 1.1rem; font-weight: 600; color: var(--fg); margin-bottom: 4px; }
-.edu-degree { color: var(--fg-muted); font-size: 0.92rem; }
-.edu-meta { font-size: 0.8rem; color: var(--fg-dim); margin-top: 4px; }
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.edu-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; transition: border-color 0.2s, box-shadow 0.2s; }
+.edu-card:hover { border-color: rgba(217,119,6,0.2); box-shadow: 0 0 40px rgba(217,119,6,0.04); }
+.edu-school { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.edu-degree { font-size: 0.88rem; color: var(--text-2); line-height: 1.5; }
+.edu-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text-4); margin-top: 8px; }
 .edu-details { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-.edu-details li { font-size: 0.88rem; color: var(--fg-muted); list-style: none; padding-left: 16px; position: relative; }
-.edu-details li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.5; }
+.edu-details li { font-size: 0.84rem; color: var(--text-2); list-style: none; padding-left: 16px; position: relative; opacity: 0.85; }
+.edu-details li::before { content: ''; position: absolute; left: 3px; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.6; }
 .edu-focus { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 768px) { .edu-grid { grid-template-columns: 1fr; } }
 
 /* Skills */
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 14px; }
-.skill-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; display: flex; align-items: center; gap: 12px; }
-.skill-card .skill-icon { width: 32px; height: 32px; background: var(--accent-soft); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.skill-card .skill-icon svg { width: 16px; height: 16px; color: var(--accent); }
-.skill-card span { font-size: 0.9rem; color: var(--fg); font-weight: 500; }
-.skill-card .endorse { font-size: 0.72rem; color: var(--fg-dim); margin-left: auto; text-align: right; }
+.skills-section { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; }
+.skill-category { margin-bottom: 24px; }
+.skill-category:last-child { margin-bottom: 0; }
+.skill-category h4 { font-size: 0.7rem; font-weight: 500; font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-4); margin-bottom: 12px; }
+.skill-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-pill { display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; font-size: 0.85rem; color: var(--text); transition: all 0.2s; }
+.skill-pill:hover { border-color: rgba(217,119,6,0.3); background: rgba(217,119,6,0.06); }
+.skill-pill .endorse { font-size: 0.68rem; color: var(--text-4); border-left: 1px solid var(--border-hover);
+  padding-left: 8px; margin-left: 4px; }
 
 /* Recommendations */
-.rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 16px; }
-.rec-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; gap: 14px; }
-.rec-header { display: flex; align-items: center; gap: 14px; }
-.rec-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
-.rec-name { font-size: 0.95rem; font-weight: 600; color: var(--fg); }
-.rec-role { font-size: 0.78rem; color: var(--fg-dim); }
-.rec-text { font-size: 0.88rem; color: var(--fg-muted); line-height: 1.6; font-style: italic; }
-.rec-text::before { content: '\201C'; color: var(--accent); font-size: 1.5rem; margin-right: 4px; line-height: 0; }
-.rec-date { font-size: 0.72rem; color: var(--fg-dim); margin-top: auto; }
+.rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; }
+.rec-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; display: flex; flex-direction: column; gap: 14px; position: relative;
+  transition: border-color 0.3s; }
+.rec-card:hover { border-color: rgba(217,119,6,0.2); }
+.rec-card::before { content: '\201C'; position: absolute; top: 16px; left: 20px;
+  font-size: 3rem; color: var(--accent); opacity: 0.1; line-height: 1; font-family: 'Inter', sans-serif; }
+.rec-header { display: flex; align-items: center; gap: 12px; z-index: 1; }
+.rec-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft);
+  color: var(--accent-2); display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+.rec-info { }
+.rec-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.rec-role { font-size: 0.72rem; color: var(--text-3); }
+.rec-text { font-size: 0.86rem; color: var(--text-2); line-height: 1.65; z-index: 1; }
+.rec-date { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--text-4); margin-top: auto; z-index: 1; }
 
-/* Company */
-.company-details { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
-.company-details h4 { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-dim); margin-bottom: 12px; }
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.contact-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 24px; display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit;
+  transition: all 0.2s; }
+.contact-card:hover { border-color: rgba(217,119,6,0.25); transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.contact-icon { width: 44px; height: 44px; background: var(--surface); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); flex-shrink: 0; }
+.contact-icon svg { width: 20px; height: 20px; color: var(--accent-2); }
+.contact-label { font-size: 0.7rem; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; }
+.contact-value { font-size: 0.9rem; font-weight: 500; color: var(--text); margin-top: 2px; }
+@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
 
 /* Footer */
-.footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; }
-.footer p { font-size: 0.8rem; color: var(--fg-dim); }
+.footer { padding: 60px 0 40px; border-top: 1px solid var(--border); text-align: center; }
+.footer p { font-size: 0.78rem; color: var(--text-4); }
+.footer-name { font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.footer-role { font-size: 0.85rem; color: var(--text-3); margin-bottom: 24px; }
 
 /* Reveal */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity var(--transition), transform var(--transition); }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 @media (max-width: 640px) {
-  .hero { padding: 100px 0 60px; }
+  .hero { padding: 100px 24px 60px; }
   .section { padding: 60px 0; }
-  .card, .edu-card, .rec-card { padding: 24px; }
-  .timeline-item { padding-left: 20px; padding-bottom: 36px; }
-  .stat-number { font-size: 1.9rem; }
+  .container { padding: 0 20px; }
+  .skills-section { padding: 24px; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
 <body>
 
+<!-- Ember particles -->
+<div class="ember-wrap">
+  <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
+  <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
+  <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
+  <div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div><div class="ember"></div>
+</div>
+
+<div class="content">
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">HUDSON.SHAW</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
 <!-- Hero -->
 <section class="hero" id="top">
+  <div class="hero-photo-wrap">
+    <img src="images/profile.jpg" alt="Hudson Shaw" class="hero-photo">
+    <div class="hero-available"></div>
+  </div>
+  <div class="hero-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg> Associate at Finial Group</div>
+  <h1>Hudson<span class="accent"> Shaw</span></h1>
+  <p class="hero-subtitle">Strategic communications and marketing professional with a 3.5 GPA at the University of Houston. Building a career at the intersection of leadership, commercial real estate, and relationship-driven sales.</p>
+  <a href="https://www.linkedin.com/in/hudsonshaw/" class="hero-cta" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    <span>View on LinkedIn</span>
+  </a>
+  <div class="hero-meta">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Houston, Texas</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg> Finial Group</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> 500+ connections</span>
+  </div>
+  <svg class="hero-scroll" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+</section>
+
+<!-- Stats -->
+<section class="section" style="padding-top:0">
   <div class="container">
-    <div class="hero-wrap">
-      <img src="images/profile.jpg" alt="Hudson Shaw" class="hero-photo">
-      <div>
-        <div class="hero-badge">Associate at Finial Group</div>
-        <h1>Hudson Shaw</h1>
-        <p class="subtitle">Strategic communications and marketing professional with a 3.5 GPA at the University of Houston. Experienced in commercial real estate, sales, and customer-facing operations across industrial, brokerage, and outdoor service environments.</p>
-        <a href="https://www.linkedin.com/in/hudsonshaw/" class="linkedin-link" target="_blank" rel="noopener noreferrer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          View on LinkedIn
-        </a>
-      </div>
-    </div>
-    <div class="hero-meta">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Houston, Texas</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>Finial Group</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>500+ connections</span>
+    <div class="stats-strip reveal">
+      <div class="stat-cell"><div class="stat-number" data-target="5">0</div><div class="stat-label">Roles</div></div>
+      <div class="stat-cell"><div class="stat-number" data-target="4">0</div><div class="stat-label">Years of college</div></div>
+      <div class="stat-cell"><div class="stat-number" data-target="2">0</div><div class="stat-label">Recommendations</div></div>
+      <div class="stat-cell"><div class="stat-number">3.5</div><div class="stat-label">GPA</div></div>
     </div>
   </div>
-  <a href="#about" class="hero-scroll"><span>Scroll</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
 </section>
 
 <!-- About -->
 <section class="section" id="about">
   <div class="container">
-    <div class="section-header reveal"><span class="section-label">About</span></div>
-    <div class="about-text reveal" style="font-size: 1.05rem; line-height: 1.7; color: var(--fg-muted); max-width: 720px;">
-      <p>As a senior at the Bauer College of Business, majoring in strategic communications with a minor in marketing, I've cultivated strong leadership, communication, and customer service skills. With a keen interest in real estate, I'm excited to bring my academic focus to the industry.</p>
-      <p style="margin-top: 1.2em;">I maintained a 3.5 GPA, belong to the University of Houston Honors College, and am active in the <strong>Program for Excellence in Selling</strong> as well as the <strong>Undergraduate Real Estate Scholars</strong>. My background spans commercial real estate acquisitions, brokerage, property management, and large-volume logistics operations.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Stats -->
-<section class="section">
-  <div class="container">
-    <div class="section-header reveal"><span class="section-label">Overview</span><h2>At a glance</h2></div>
-    <div class="stats-grid reveal">
-      <div class="stat-card"><div class="stat-number" data-target="5">0</div><div class="stat-label">Roles</div></div>
-      <div class="stat-card"><div class="stat-number" data-target="4">0</div><div class="stat-label">Years of College</div></div>
-      <div class="stat-card"><div class="stat-number" data-target="2">0</div><div class="stat-label">Recommendations</div></div>
-      <div class="stat-card"><div class="stat-number">3.5</div><div class="stat-label">GPA</div></div>
+    <div class="section-header reveal"><span class="section-num">01</span><h2>About</h2></div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>As a senior at the Bauer College of Business, majoring in strategic communications with a minor in marketing, I've cultivated strong leadership, communication, and customer service skills. With a keen interest in real estate, I'm excited to bring my academic focus to the industry.</p>
+        <p>My background spans commercial real estate acquisitions and brokerage, professional sales training, large-volume logistics operations, and high-touch customer service in exclusive club environments. I maintained a 3.5 GPA while belonging to the Honors College, the Program for Excellence in Selling, and the Undergraduate Real Estate Scholars.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div><div class="highlight-label">Experience</div><div class="highlight-value">5 roles across CRE, sales, and ops</div></div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <div><div class="highlight-label">Education</div><div class="highlight-value">Bauer College of Business, UH Honors</div></div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M2 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg></div>
+          <div><div class="highlight-label">Network</div><div class="highlight-value">500+ connections, 807 followers</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- Experience -->
-<section class="section">
+<section class="section" id="experience">
   <div class="container">
-    <div class="section-header reveal"><span class="section-label">Experience</span><h2>Work history</h2></div>
+    <div class="section-header reveal"><span class="section-num">02</span><h2>Experience</h2></div>
     <div class="timeline reveal">
       <div class="timeline-item">
-        <div class="role-title">Associate</div>
-        <div class="role-company">Finial Group</div>
-        <div class="role-meta"><span>Full-time</span><span>Jun 2025 - Present</span><span>Houston, Texas</span><span>On-site</span></div>
-        <div class="role-desc">Private equity commercial real estate firm specializing in single-tenant, free-standing industrial assets across high-growth Sunbelt markets.</div>
-        <div class="company-details">
-          <h4>Office Locations</h4>
-          <div class="role-tags"><span class="tag">Houston, TX</span><span class="tag">Dallas, TX</span><span class="tag">San Antonio, TX</span><span class="tag">Nashville, TN</span><span class="tag">Atlanta, GA</span></div>
-          <h4 style="margin-top:14px">Leadership</h4>
-          <div class="role-desc">
-            Keith Bilski (President &amp; CEO), Dylan Schopper (Managing Director of Investments), Jack Gaffney (Director), Jason Gibbons (VP - Brokerage), Chase Tucker (VP - Brokerage).<br><span style="color:var(--fg-dim);font-size:0.82rem">HQ: 8381 Westview Dr, Houston, TX 77055</span>
+        <div class="timeline-date">Jun 2025 - Present</div>
+        <div class="timeline-body">
+          <div class="role-title">Associate</div> at <span class="role-company">Finial Group</span>
+          <div class="role-meta">Full-time &bull; Houston, Texas &bull; On-site</div>
+          <div class="role-desc">Private equity commercial real estate firm founded in 2010, specializing in the aggregation of single-tenant, free-standing industrial assets across high-growth Sunbelt markets.</div>
+          <div class="company-details">
+            <h4>Offices</h4>
+            <div class="role-tags"><span class="tag">Houston, TX</span><span class="tag">Dallas, TX</span><span class="tag">San Antonio, TX</span><span class="tag">Nashville, TN</span><span class="tag">Atlanta, GA</span></div>
+            <h4>Leadership</h4>
+            <div class="role-desc">Keith Bilski (President &amp; CEO), Dylan Schopper (Managing Director of Investments), Jack Gaffney (Director), Jason Gibbons (VP - Brokerage), Chase Tucker (VP - Brokerage). HQ: 8381 Westview Dr, Houston, TX 77055</div>
           </div>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="role-title">Outside Services</div>
-        <div class="role-company">River Oaks Country Club</div>
-        <div class="role-meta"><span>Part-time</span><span>Oct 2021 - Feb 2025</span><span>3 yrs 5 mos</span><span>River Oaks, Texas</span><span>On-site</span></div>
-        <div class="role-desc">
-          <ul>
-            <li>Maintained range operations — ensured members had clean, maintained balls and equipment for efficient day at the course.</li>
-            <li>Maintained cleanliness across all 18 holes, reported issues, and managed a steady fleet of golf carts for member use.</li>
-            <li>Aided approximately 50 members daily with course needs, tee-time coordination, and equipment support.</li>
-          </ul>
+        <div class="timeline-date">Oct 2021 - Feb 2025</div>
+        <div class="timeline-body">
+          <div class="role-title">Outside Services</div> at <span class="role-company">River Oaks Country Club</span>
+          <div class="role-meta">Part-time &bull; River Oaks, Texas &bull; On-site &bull; 3 yrs 5 mos</div>
+          <div class="role-desc">
+            <ul>
+              <li>Maintained driving range operations — ensured members had clean, maintained balls and equipment for an efficient day at the course.</li>
+              <li>Managed cleanliness across all 18 holes, reported issues, and managed a steady fleet of golf carts for ~50 members daily.</li>
+              <li>Aided members with course needs, tee-time coordination, and equipment support.</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="timeline-item">
-        <div class="role-title">Sales Professional</div>
-        <div class="role-company">The Stephen Stagner Sales Excellence Institute</div>
-        <div class="role-meta"><span>Jan 2024 - Dec 2024</span><span>1 yr</span><span>Houston, Texas</span><span>On-site</span></div>
-        <div class="role-desc">Participated in the PES Sales Excellence cohort at the University of Houston — trained in professional selling, relationship building, and presentation delivery. Promoted and sold sponsorships and player packages for the <strong>PES Open</strong>, Houston's largest non-profit golf tournament.</div>
-        <div class="role-tags"><span class="tag">Salesforce</span><span class="tag">Presentation Skills</span><span class="tag">Cold Calling</span></div>
+        <div class="timeline-date">Jan 2024 - Dec 2024</div>
+        <div class="timeline-body">
+          <div class="role-title">Sales Professional</div> at <span class="role-company">The Stephen Stagner Sales Excellence Institute</span>
+          <div class="role-meta">Houston, Texas &bull; On-site &bull; 1 yr</div>
+          <div class="role-desc">Participated in the PES Sales Excellence cohort at the University of Houston — trained in professional selling, relationship building, and presentation delivery. Promoted and sold sponsorships and player packages for the PES Open, Houston's largest non-profit golf tournament.</div>
+          <div class="role-tags"><span class="tag">Salesforce</span><span class="tag">Presentation Skills</span><span class="tag">Cold Calling</span></div>
+        </div>
       </div>
       <div class="timeline-item">
-        <div class="role-title">Intern</div>
-        <div class="role-company">Matthews Real Estate Investment Services</div>
-        <div class="role-meta"><span>Full-time</span><span>Jun 2024 - Jul 2024</span><span>2 mos</span><span>Houston, Texas</span><span>On-site</span></div>
-        <div class="role-desc">
-          <ul>
-            <li>Researched properties and market trends using Crexi, Atlas, and CoStar platforms.</li>
-            <li>Analyzed leasing agreements and mastered lease interpretation.</li>
-            <li>Practiced cold calling for industry pipeline efficiency.</li>
-          </ul>
+        <div class="timeline-date">Jun 2024 - Jul 2024</div>
+        <div class="timeline-body">
+          <div class="role-title">Intern</div> at <span class="role-company">Matthews Real Estate Investment Services</span>
+          <div class="role-meta">Full-time &bull; Houston, Texas &bull; On-site &bull; 2 mos</div>
+          <div class="role-desc">
+            <ul>
+              <li>Researched properties and market trends using Crexi, Atlas, and CoStar platforms.</li>
+              <li>Analyzed leasing agreements and mastered lease interpretation.</li>
+              <li>Practiced cold calling for industry pipeline efficiency.</li>
+            </ul>
+          </div>
+          <div class="role-tags"><span class="tag">Crexi</span><span class="tag">Atlas</span><span class="tag">CoStar</span><span class="tag">Cold Calling</span><span class="tag">Team Leadership</span></div>
         </div>
-        <div class="role-tags"><span class="tag">Crexi</span><span class="tag">Atlas</span><span class="tag">CoStar</span><span class="tag">Cold Calling</span><span class="tag">Team Leadership</span></div>
       </div>
       <div class="timeline-item">
-        <div class="role-title">Processor</div>
-        <div class="role-company">Leader Creek Fisheries</div>
-        <div class="role-meta"><span>Full-time</span><span>Jun 2022 - Jul 2022</span><span>2 mos</span><span>Naknek, Alaska</span><span>On-site</span></div>
-        <div class="role-desc">
-          <ul>
-            <li>Worked in shipping/packing — constructed and delivered approximately 500 boxes averaging 1,200 lbs each to the shipping department per season.</li>
-            <li>Inspected and stored 3 fish types; scanned roughly 50,000 lbs of fish per shift, verifying size, shape, color, and proper packaging.</li>
-            <li>Operated 16-hour shifts, 7 days/week, for 1.5 months in factory and freezer doing inventory and ensuring all order requirements were met.</li>
-          </ul>
+        <div class="timeline-date">Jun 2022 - Jul 2022</div>
+        <div class="timeline-body">
+          <div class="role-title">Processor</div> at <span class="role-company">Leader Creek Fisheries</span>
+          <div class="role-meta">Full-time &bull; Naknek, Alaska &bull; On-site &bull; 2 mos</div>
+          <div class="role-desc">
+            <ul>
+              <li>Constructed and delivered ~500 boxes of fish to shipping (avg 1,200 lbs each).</li>
+              <li>Inspected and stored 3 fish types; scanned ~50,000 lbs per shift verifying size, shape, color, and packaging.</li>
+              <li>Operated 16-hour shifts, 7 days/week for 1.5 months in factory and freezer doing inventory and order fulfillment.</li>
+            </ul>
+          </div>
+          <div class="role-tags"><span class="tag">Inventory Control</span><span class="tag">Team Leadership</span></div>
         </div>
-        <div class="role-tags"><span class="tag">Inventory Control</span><span class="tag">Team Leadership</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Education -->
-<section class="section">
+<section class="section" id="education">
   <div class="container">
-    <div class="section-header reveal"><span class="section-label">Education</span><h2>Academic background</h2></div>
-    <div class="edu-card reveal">
-      <div class="edu-school">University of Houston</div>
-      <div class="edu-degree">Bachelor's degree, Organizational Communication / Business &amp; Marketing</div>
-      <div class="edu-meta">Aug 2020 - Dec 2024 &bull; Senior &bull; 3.5 GPA</div>
-      <ul class="edu-details">
-        <li>Honors College at UH — earned through academic success (since Mar 2022)</li>
-        <li>Program for Excellence in Selling (PES member)</li>
-        <li>Undergraduate Real Estate Scholars</li>
-      </ul>
-    </div>
-    <div class="edu-card reveal" style="margin-top:16px">
-      <div class="edu-school">The Stephen Stagner Sales Excellence Institute</div>
-      <div class="edu-degree">Sales Training Program</div>
-      <div class="edu-meta">Jan 2024 - Dec 2024 &bull; Houston, Texas</div>
-      <div class="edu-focus" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
-        <span class="tag">Salesforce</span><span class="tag">Presentation Skills</span><span class="tag">Cold Calling</span>
+    <div class="section-header reveal"><span class="section-num">03</span><h2>Education</h2></div>
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="edu-school">University of Houston</div>
+        <div class="edu-degree">Bachelor's degree, Organizational Communication / Business &amp; Marketing</div>
+        <div class="edu-meta">Aug 2020 - Dec 2024 &bull; Senior &bull; 3.5 GPA</div>
+        <ul class="edu-details">
+          <li>Honors College at UH (since Mar 2022) — earned through academic success</li>
+          <li>Program for Excellence in Selling (PES)</li>
+          <li>Undergraduate Real Estate Scholars</li>
+        </ul>
+      </div>
+      <div class="edu-card">
+        <div class="edu-school">The Stephen Stagner Sales Excellence Institute</div>
+        <div class="edu-degree">Sales Training Program</div>
+        <div class="edu-meta">Jan 2024 - Dec 2024 &bull; Houston, Texas</div>
+        <div class="edu-focus"><span class="tag">Salesforce</span><span class="tag">Presentation Skills</span><span class="tag">Cold Calling</span></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Skills -->
-<section class="section">
+<section class="section" id="skills">
   <div class="container">
-    <div class="section-header reveal"><span class="section-label">Skills</span><h2>Capabilities</h2></div>
-    <div class="skills-grid reveal">
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22m-17 4h2m-2-8h2"/></svg></div><span>Excel</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M7 8h4m-2-2v12m-2-2h8"/></svg></div><span>Salesforce</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13l-3-3m0 0l-3 3m3-3v9m0-9H6"/></svg></div><span>CoStar / Crexi / Atlas</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><span>Cold Calling</span><span class="endorse">1 endorsement</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg></div><span>Inventory Control</span><span class="endorse">1 endorsement</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><span>Team Leadership</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg></div><span>Presentation Skills</span></div>
-      <div class="skill-card"><div class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21.128V15.75a4.75 4.75 0 00-4.75-4.75H8A4.75 4.75 0 003.25 15.75V21.128"/><circle cx="12" cy="7" r="4.75"/></svg></div><span>Customer Service</span></div>
+    <div class="section-header reveal"><span class="section-num">04</span><h2>Skills</h2></div>
+    <div class="skills-section reveal">
+      <div class="skill-category">
+        <h4>Software</h4>
+        <div class="skill-row">
+          <span class="skill-pill">Excel</span>
+          <span class="skill-pill">Salesforce</span>
+          <span class="skill-pill">CoStar</span>
+          <span class="skill-pill">Crexi</span>
+          <span class="skill-pill">Atlas</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h4>Core Skills</h4>
+        <div class="skill-row">
+          <span class="skill-pill">Cold Calling<span class="endorse">1 endorsement</span></span>
+          <span class="skill-pill">Inventory Control<span class="endorse">1 endorsement</span></span>
+          <span class="skill-pill">Team Leadership</span>
+          <span class="skill-pill">Presentation Skills</span>
+          <span class="skill-pill">Customer Service</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -287,26 +488,20 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 <!-- Recommendations -->
 <section class="section">
   <div class="container">
-    <div class="section-header reveal"><span class="section-label">Testimonials</span><h2>What colleagues say</h2></div>
+    <div class="section-header reveal"><span class="section-num">05</span><h2>Testimonials</h2></div>
     <div class="rec-grid reveal">
       <div class="rec-card">
         <div class="rec-header">
-          <div class="rec-avatar">AH</div>
-          <div>
-            <div class="rec-name">Adriana H.</div>
-            <div class="rec-role">Marketing | University of Houston Alumni &bull; Team Lead at PES</div>
-          </div>
+          <div class="rec-avatar">A</div>
+          <div class="rec-info"><div class="rec-name">Adriana H.</div><div class="rec-role">Marketing &bull; UH Alumni &bull; Team Lead at PES</div></div>
         </div>
-        <div class="rec-text">It has been a privilege to serve as Hudson's team lead during our tenure at The Stephen Stagner Sales Excellence Institute. Throughout our collaboration, I witnessed firsthand Hudson's exceptional perseverance and unwavering determination. In every project and task, Hudson consistently demonstrated a remarkable level of persistence, tackling challenges head-on and relentlessly pursuing success. This attribute not only fueled Hudson's own professional growth but also inspired and motivated our entire team to strive for excellence. Hudson's dedication to overcoming obstacles and achieving goals is truly commendable and makes him an invaluable asset to any organization.</div>
+        <div class="rec-text">It has been a privilege to serve as Hudson's team lead during our tenure at The Stephen Stagner Sales Excellence Institute. Throughout our collaboration, I witnessed firsthand Hudson's exceptional perseverance and unwavering determination. In every project and task, Hudson consistently demonstrated a remarkable level of persistence, tackling challenges head-on and relentlessly pursuing success. This attribute not only fueled Hudson's own professional growth but also inspired and motivated our entire team to strive for excellence. Hudson's dedication makes him an invaluable asset to any organization.</div>
         <div class="rec-date">March 5, 2024</div>
       </div>
       <div class="rec-card">
         <div class="rec-header">
-          <div class="rec-avatar">JS</div>
-          <div>
-            <div class="rec-name">Jonathon Paul Stockton</div>
-            <div class="rec-role">Classmate at UH</div>
-          </div>
+          <div class="rec-avatar">J</div>
+          <div class="rec-info"><div class="rec-name">Jonathon Paul Stockton</div><div class="rec-role">Classmate at UH</div></div>
         </div>
         <div class="rec-text">Hudson consistently shows up for the team and proves himself to be more than just a valuable asset — more along the lines of an irreplaceable one. Because of his leadership skills and trustworthiness I'm grateful to have him in my corner. Hudson is always hungry for bigger and better challenges and more than rises to the occasion as a competitor, colleague, and friend.</div>
         <div class="rec-date">March 5, 2024</div>
@@ -318,43 +513,69 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; back
 <!-- Contact -->
 <section class="section">
   <div class="container">
-    <div class="section-header reveal"><span class="section-label">Contact</span><h2>Get in touch</h2></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px" class="reveal">
-      <div class="card" style="padding:24px;display:flex;align-items:center;gap:16px">
-        <div style="width:44px;height:44px;background:var(--bg-elevated);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/></svg></div>
-        <div style="display:flex;flex-direction:column"><span style="font-size:0.75rem;color:var(--fg-dim);text-transform:uppercase;letter-spacing:0.08em">LinkedIn</span><span style="font-size:0.95rem;font-weight:500;color:var(--fg);margin-top:2px">Hudson Shaw</span></div>
+    <div class="section-header reveal"><span class="section-num">06</span><h2>Connect</h2></div>
+    <div class="contact-grid reveal">
+      <a class="contact-card" href="https://www.linkedin.com/in/hudsonshaw/" target="_blank" rel="noopener">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+        <div><div class="contact-label">LinkedIn</div><div class="contact-value">Hudson Shaw</div></div>
+      </a>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><div class="contact-label">Location</div><div class="contact-value">Houston, Texas</div></div>
       </div>
-      <div class="card" style="padding:24px;display:flex;align-items:center;gap:16px">
-        <div style="width:44px;height:44px;background:var(--bg-elevated);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div style="display:flex;flex-direction:column"><span style="font-size:0.75rem;color:var(--fg-dim);text-transform:uppercase;letter-spacing:0.08em">Location</span><span style="font-size:0.95rem;font-weight:500;color:var(--fg);margin-top:2px">Houston, Texas</span></div>
-      </div>
-      <div class="card" style="padding:24px;display:flex;align-items:center;gap:16px">
-        <div style="width:44px;height:44px;background:var(--bg-elevated);border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
-        <div style="display:flex;flex-direction:column"><span style="font-size:0.75rem;color:var(--fg-dim);text-transform:uppercase;letter-spacing:0.08em">Company</span><span style="font-size:0.95rem;font-weight:500;color:var(--fg);margin-top:2px">Finial Group</span></div>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+        <div><div class="contact-label">Company</div><div class="contact-value">Finial Group</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="footer"><div class="container"><p>Hudson Shaw — Finial Group — Houston, Texas</p></div></footer>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-name">Hudson Shaw</div>
+    <div class="footer-role">Associate at Finial Group — Houston, Texas</div>
+    <p>&copy; 2024. Built with care.</p>
+  </div>
+</footer>
+
+</div>
 
 <script>
-const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 function animateCounter(el) {
   const target = parseFloat(el.dataset.target); if (isNaN(target)) return;
   const start = performance.now();
-  function step(now) { const p = Math.min((now - start) / 1500, 1);
+  function step(now) {
+    const p = Math.min((now - start) / 1500, 1);
     const eased = 1 - Math.pow(1 - p, 3);
     el.textContent = Number.isInteger(target) ? Math.floor(eased * target).toLocaleString() : (eased * target).toFixed(1);
     if (p < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
 }
-const statObs = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting && !entry.target.dataset.counted) { entry.target.dataset.counted = '1'; animateCounter(entry); } }); }, { threshold: 0.5 });
+const statObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = '1'; animateCounter(entry);
+    }
+  });
+}, { threshold: 0.5 });
 document.querySelectorAll('.stat-number[data-target]').forEach(el => statObs.observe(el));
+
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent-2)' : ''; });
+});
 </script>
 </body>
 </html>
