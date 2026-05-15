@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hudson Shaw — Associate at Finial Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0b0d;
+  --bg-elevated: #111215;
+  --bg-card: #16181c;
+  --fg: #e8eaed;
+  --fg-muted: #9aa0a6;
+  --fg-dim: #5f6368;
+  --accent: #3b82f6;
+  --accent-soft: rgba(59,130,246,0.08);
+  --border: rgba(255,255,255,0.06);
+  --radius: 12px;
+  --max-width: 880px;
+  --transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero */
+.hero {
+  min-height: 100dvh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 0 80px;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(59,130,246,0.15);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 32px;
+  width: fit-content;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.hero .subtitle {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  color: var(--fg-muted);
+  font-weight: 300;
+  max-width: 560px;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 0.875rem;
+  color: var(--fg-dim);
+}
+
+.hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-meta svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--fg-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+  40% { transform: translateX(-50%) translateY(-8px); }
+  60% { transform: translateX(-50%) translateY(-4px); }
+}
+
+/* Section styling */
+.section {
+  padding: 100px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.section h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  border-color: rgba(59,130,246,0.2);
+  transform: translateY(-2px);
+}
+
+/* About */
+.about-text {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  max-width: 720px;
+}
+
+.about-text p + p {
+  margin-top: 1.2em;
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--fg-dim);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Experience */
+.role-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+}
+
+.role-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.role-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.role-company {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.role-meta {
+  font-size: 0.85rem;
+  color: var(--fg-dim);
+  margin-top: 4px;
+}
+
+.role-desc {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* Company details */
+.company-details {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.company-details h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-dim);
+  margin-bottom: 16px;
+}
+
+.office-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.office-list li {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  background: var(--bg-elevated);
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+
+.leader {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+.leader strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* Education */
+.edu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+
+.edu-school {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+
+.edu-degree {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+}
+
+.edu-focus {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-weight: 500;
+}
+
+/* Connect */
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 16px;
+}
+
+.connect-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.connect-card:hover {
+  border-color: rgba(59,130,246,0.25);
+  transform: translateY(-2px);
+}
+
+.connect-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.connect-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+}
+
+.connect-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.connect-label {
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.connect-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin-top: 2px;
+}
+
+/* Footer */
+.footer {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.footer p {
+  font-size: 0.8rem;
+  color: var(--fg-dim);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 100px 0 60px; }
+  .section { padding: 60px 0; }
+  .card, .role-card, .edu-card { padding: 24px; }
+  .hero-meta { gap: 14px; }
+  .stat-number { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-badge">Associate at Finial Group</div>
+    <h1>Hudson Shaw</h1>
+    <p class="subtitle">Senior at Bauer College of Business. Strategic communications major, marketing minor. Building a career at the intersection of leadership and commercial real estate.</p>
+    <div class="hero-meta">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Houston, Texas
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        500+ connections
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        807 followers
+      </span>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </a>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">About</span>
+    </div>
+    <div class="about-text reveal">
+      <p>As a senior at the Bauer College of Business, majoring in strategic communications with a minor in marketing, I've cultivated strong leadership, communication, and customer service skills. With a keen interest in real estate, I'm excited to bring my academic focus to the industry.</p>
+      <p>Currently serving as an Associate at Finial Group, a private equity commercial real estate firm with a disciplined focus on industrial investments across high-growth Sunbelt markets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Presence</span>
+      <h2>Network at a glance</h2>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-number" data-target="500">0</div>
+        <div class="stat-label">Connections</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="807">0</div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="5">0</div>
+        <div class="stat-label">Finial Offices</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Experience</span>
+      <h2>Current role</h2>
+    </div>
+    <div class="role-card reveal">
+      <div class="role-header">
+        <div>
+          <div class="role-title">Associate</div>
+          <div class="role-company">Finial Group</div>
+          <div class="role-meta">Houston, Texas, United States</div>
+        </div>
+      </div>
+      <p class="role-desc">Finial Group is a private equity commercial real estate firm founded in 2010, specializing in the aggregation of single-tenant, free-standing industrial assets across high-growth Sunbelt markets. The firm's Single Tenant Industrial Aggregation Fund proactively targets off-market opportunities with strong fundamentals, durable tenancy, and clear paths to value creation.</p>
+
+      <div class="company-details">
+        <h4>Office Locations</h4>
+        <ul class="office-list">
+          <li>Houston, TX</li>
+          <li>Dallas, TX</li>
+          <li>San Antonio, TX</li>
+          <li>Nashville, TN</li>
+          <li>Atlanta, GA</li>
+        </ul>
+
+        <h4>Leadership</h4>
+        <div class="leadership-grid">
+          <div class="leader"><strong>Keith Bilski</strong><br>President & CEO</div>
+          <div class="leader"><strong>Dylan Schopper</strong><br>Managing Director of Investments</div>
+          <div class="leader"><strong>Jack Gaffney</strong><br>Director</div>
+          <div class="leader"><strong>Jason Gibbons</strong><br>Vice President — Brokerage</div>
+          <div class="leader"><strong>Chase Tucker</strong><br>Vice President — Brokerage</div>
+        </div>
+
+        <div style="margin-top: 16px; font-size: 0.8rem; color: var(--fg-dim);">
+          HQ: 8381 Westview Dr, Houston, TX 77055
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Education</span>
+      <h2>Academic background</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-school">Bauer College of Business</div>
+      <div class="edu-degree">Senior — Strategic Communications (Major), Marketing (Minor)</div>
+      <div class="edu-focus">
+        <span class="tag">Leadership</span>
+        <span class="tag">Communication</span>
+        <span class="tag">Customer Service</span>
+        <span class="tag">Real Estate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Connect -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Contact</span>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="connect-grid reveal">
+      <div class="connect-card">
+        <div class="connect-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="connect-info">
+          <span class="connect-label">LinkedIn</span>
+          <span class="connect-value">Hudson Shaw</span>
+        </div>
+      </div>
+      <div class="connect-card">
+        <div class="connect-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="connect-info">
+          <span class="connect-label">Location</span>
+          <span class="connect-value">Houston, Texas</span>
+        </div>
+      </div>
+      <div class="connect-card">
+        <div class="connect-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <div class="connect-info">
+          <span class="connect-label">Company</span>
+          <span class="connect-value">Finial Group</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>Hudson Shaw — Finial Group — Houston, Texas</p>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Stat counters
+const animateCounter = (el) => {
+  const target = parseInt(el.dataset.target, 10);
+  const duration = 1500;
+  const start = performance.now();
+  const step = (now) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target).toLocaleString();
+    if (progress < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+};
+
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = '1';
+      animateCounter(entry);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
+</script>
+
+</body>
+</html>
